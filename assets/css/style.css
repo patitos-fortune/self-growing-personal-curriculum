@@ -1,0 +1,557 @@
+/* =========================================================
+   SELF-GROWING PERSONAL CURRICULUM — shared stylesheet
+   Design goals: readable at arm's length on a cardio-machine
+   touchscreen, large touch targets, no external fonts/scripts,
+   works with CSS alone (no JS required for layout or nav).
+   ========================================================= */
+
+:root {
+  --color-bg:        #faf6ee;
+  --color-bg-raised: #ffffff;
+  --color-text:      #2b2620;
+  --color-text-soft: #55493c;
+  --color-border:    #ddd0ba;
+  --color-accent:    #aa5f1b;   /* warm accessible accent */
+  --color-accent-dark: #8a4a12;
+  --color-accent-soft: #f3e3c8;
+  --color-tier1:     #3f7a4e;   /* green   - quick wins */
+  --color-tier2:     #a3661a;   /* amber   - intermediate */
+  --color-tier3:     #6b4d99;   /* violet  - deep dives */
+  --color-focus:     #1c5fa8;
+
+  --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-head: Georgia, "Times New Roman", Times, serif;
+
+  --max-width: 46rem;
+  --radius: 10px;
+}
+
+/* ---------- Reset-ish basics ---------- */
+* { box-sizing: border-box; }
+
+html {
+  font-size: 112.5%; /* ~18px base, scales up below for readability */
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 1.15rem;
+  line-height: 1.65;
+  min-height: 100vh;
+}
+
+/* Ordinary prose wraps at word boundaries by default, which is what we
+   want for table headers like "Position" (breaking those mid-letter, as
+   word-break:break-word would, is worse than the problem it solves). Only
+   elements likely to carry one long unbroken token — links and inline
+   code such as repository paths or function signatures — get permission
+   to break mid-word, and only as a last resort. */
+/* General safety net: prose can contain an unbroken slash-joined compound
+   (e.g. "Undo/Redo/Replay", "KernelExplainer/Explainer") with no ordinary
+   space to wrap at, which would otherwise be clipped by overflow-x:hidden
+   on a narrow screen. Table cells are deliberately excluded and reset back
+   to normal breaking just below: a wide table already scrolls within its
+   own .table-scroll box, and breaking a short header word like "Position"
+   mid-letter to avoid that scroll would look far worse than the problem
+   it solves. */
+p, li, span, a, code, dt, dd, figcaption {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+.diagram-table th, .diagram-table td,
+table.data-table th, table.data-table td {
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+img { max-width: 100%; display: block; }
+
+h1, h2, h3, h4 {
+  font-family: var(--font-head);
+  color: var(--color-text);
+  line-height: 1.25;
+  margin-top: 1.6em;
+  margin-bottom: 0.5em;
+  /* A lesson title can contain a slash-joined compound ("Undo/Redo/Replay")
+     that a narrow screen has no ordinary space to wrap at. */
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+h1 { font-size: 2rem; margin-top: 0; }
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.2rem; }
+
+p, ul, ol { margin: 0 0 1.1em 0; }
+ul, ol { padding-left: 1.4em; }
+
+a {
+  color: var(--color-accent-dark);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+a:hover { color: var(--color-accent); }
+
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+code, pre {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 0.95em;
+}
+
+code {
+  background: var(--color-accent-soft);
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+}
+
+pre {
+  background: #2b2620;
+  color: #f3ead9;
+  padding: 1em 1.1em;
+  border-radius: var(--radius);
+  overflow-x: auto;
+  line-height: 1.5;
+}
+pre code { background: none; padding: 0; color: inherit; }
+
+hr {
+  border: none;
+  border-top: 1px solid var(--color-border);
+  margin: 2em 0;
+}
+
+/* ---------- Layout shell ---------- */
+.page {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 1.25rem 1.25rem 3rem;
+}
+
+.site-header {
+  border-bottom: 3px solid var(--color-accent-soft);
+  background: var(--color-bg-raised);
+}
+
+.site-header .page {
+  padding-top: 1.4rem;
+  padding-bottom: 1.4rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+  color: var(--color-text);
+}
+
+.brand:hover { color: var(--color-accent-dark); }
+
+.brand svg { width: 2rem; height: 2rem; flex-shrink: 0; }
+
+.brand-name {
+  font-family: var(--font-head);
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+.crumb {
+  font-size: 1rem;
+  color: var(--color-text-soft);
+}
+
+.site-footer {
+  border-top: 1px solid var(--color-border);
+  margin-top: 3rem;
+  color: var(--color-text-soft);
+  font-size: 0.95rem;
+}
+
+/* ---------- Home hero ---------- */
+.home-hero {
+  text-align: center;
+  padding: 1.5rem 0 1rem;
+}
+
+.home-hero svg { width: 4.5rem; height: 4.5rem; margin: 0 auto 0.75rem; }
+
+.home-hero h1 { font-size: 2.4rem; }
+
+.home-subtitle {
+  font-size: 1.25rem;
+  color: var(--color-text-soft);
+  max-width: 34rem;
+  margin: 0 auto 1rem;
+}
+
+/* ---------- Course card (home page) ---------- */
+.course-card {
+  display: block;
+  background: var(--color-bg-raised);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  text-decoration: none;
+  color: var(--color-text);
+  min-height: 44px;
+}
+
+.course-card:hover,
+.course-card:focus-visible {
+  border-color: var(--color-accent);
+}
+
+.course-card h2 {
+  margin-top: 0;
+  font-size: 1.6rem;
+}
+
+.course-meta {
+  color: var(--color-text-soft);
+  font-size: 1.05rem;
+  margin-bottom: 0.75rem;
+}
+
+.course-path {
+  font-size: 1.05rem;
+  color: var(--color-text-soft);
+}
+
+.course-card .btn { margin-top: 1rem; }
+
+/* ---------- Section heading for tiers ---------- */
+.tier-heading {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  margin-top: 2.2rem;
+  padding-top: 0.4rem;
+}
+
+.tier-heading h2 { margin: 0; }
+
+.tier-badge {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  padding: 0.25em 0.65em;
+  border-radius: 999px;
+  color: #fff;
+  white-space: nowrap;
+}
+
+.tier-badge.tier-1 { background: var(--color-tier1); }
+.tier-badge.tier-2 { background: var(--color-tier2); }
+.tier-badge.tier-3 { background: var(--color-tier3); }
+
+.tier-intro {
+  color: var(--color-text-soft);
+  margin-top: -0.4rem;
+}
+
+/* ---------- Lesson list card (course index) ---------- */
+.lesson-list {
+  list-style: none;
+  margin: 0 0 1rem 0;
+  padding: 0;
+}
+
+.lesson-card {
+  display: block;
+  background: var(--color-bg-raised);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 1.1rem 1.25rem;
+  margin-bottom: 1rem;
+  text-decoration: none;
+  color: var(--color-text);
+}
+
+.lesson-card:hover,
+.lesson-card:focus-visible {
+  border-color: var(--color-accent);
+}
+
+.lesson-card-top {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.lesson-number {
+  font-family: var(--font-head);
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: var(--color-accent-dark);
+  min-width: 2.2ch;
+}
+
+.lesson-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  flex: 1 1 12rem;
+}
+
+.lesson-duration {
+  font-size: 0.95rem;
+  color: var(--color-text-soft);
+  white-space: nowrap;
+}
+
+.lesson-desc {
+  margin: 0.5rem 0 0;
+  color: var(--color-text-soft);
+}
+
+/* ---------- Lesson page header ---------- */
+.lesson-header {
+  border-bottom: 2px solid var(--color-accent-soft);
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.lesson-header .lesson-number {
+  font-size: 2.2rem;
+}
+
+.lesson-header h1 {
+  margin-top: 0.2rem;
+  margin-bottom: 0.4rem;
+}
+
+.lesson-tagline {
+  font-size: 1.15rem;
+  color: var(--color-text-soft);
+  font-style: italic;
+  margin-bottom: 0;
+}
+
+.lesson-meta-row {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 0.7rem;
+}
+
+.duration-badge {
+  display: inline-block;
+  font-size: 0.95rem;
+  color: var(--color-text-soft);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  padding: 0.2em 0.75em;
+  max-width: 100%;
+  /* The source-citation badge carries a slash-joined repo name
+     (e.g. "PathOfBuildingCommunity/PathOfBuilding") with no ordinary
+     space to break at, which a narrow screen otherwise can't wrap. */
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+/* ---------- Lesson body sections ---------- */
+.lesson-section {
+  margin: 2rem 0;
+}
+
+.lesson-section > h2 {
+  border-left: 5px solid var(--color-accent);
+  padding-left: 0.6rem;
+}
+
+.callout {
+  background: var(--color-accent-soft);
+  border-radius: var(--radius);
+  padding: 1rem 1.2rem;
+  margin: 1.2rem 0;
+}
+
+.callout h3 { margin-top: 0; }
+
+/* ---------- Simple diagram / state-table helpers ---------- */
+/* .table-scroll wraps each table so a wide one (many columns) scrolls
+   horizontally within its own small box on a narrow screen, instead of
+   either forcing the whole page to scroll sideways or being clipped by
+   html/body's page-level overflow-x:hidden below. The <table> itself keeps
+   its normal display:table so header and body columns stay aligned. */
+.table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  max-width: 100%;
+  margin: 1.2rem 0;
+}
+.diagram-table,
+table.data-table {
+  border-collapse: collapse;
+  margin: 0;
+  font-size: 1rem;
+}
+
+.diagram-table caption,
+table.data-table caption {
+  text-align: left;
+  color: var(--color-text-soft);
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.diagram-table th, .diagram-table td,
+table.data-table th, table.data-table td {
+  border: 1px solid var(--color-border);
+  padding: 0.55rem 0.7rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.diagram-table th, table.data-table th {
+  background: var(--color-accent-soft);
+}
+
+.state-flow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  margin: 1.2rem 0;
+}
+
+.state-chip {
+  display: inline-block;
+  border: 2px solid var(--color-border);
+  border-radius: 999px;
+  padding: 0.4em 0.9em;
+  background: var(--color-bg-raised);
+  font-weight: 600;
+}
+
+.state-chip.is-current { border-color: var(--color-accent); color: var(--color-accent-dark); }
+
+.state-arrow { font-size: 1.3rem; color: var(--color-text-soft); }
+
+/* ---------- Exercise / reveal ---------- */
+.exercise {
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius);
+  padding: 1.1rem 1.25rem;
+  margin: 1.2rem 0;
+  background: var(--color-bg-raised);
+}
+
+.exercise h3 { margin-top: 0; }
+
+details {
+  margin-top: 0.9rem;
+  border-top: 1px solid var(--color-border);
+  padding-top: 0.8rem;
+}
+
+summary {
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--color-accent-dark);
+  padding: 0.4rem 0.2rem;
+  min-height: 44px;
+  display: list-item;
+}
+
+details[open] summary { margin-bottom: 0.6rem; }
+
+/* ---------- Takeaways ---------- */
+.takeaways {
+  background: var(--color-bg-raised);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 1.1rem 1.25rem;
+}
+
+.takeaways h2 { margin-top: 0; }
+.takeaways ul { margin-bottom: 0; }
+.takeaways li { margin-bottom: 0.5em; }
+
+/* ---------- Navigation buttons ---------- */
+.btn {
+  display: inline-block;
+  min-height: 56px;
+  min-width: 44px;
+  padding: 0.9rem 1.3rem;
+  border-radius: var(--radius);
+  border: 2px solid var(--color-accent);
+  background: var(--color-accent);
+  color: #fff !important;
+  text-decoration: none !important;
+  font-weight: 700;
+  font-size: 1.05rem;
+  text-align: center;
+  line-height: 1.3;
+}
+
+.btn:hover, .btn:focus-visible { background: var(--color-accent-dark); border-color: var(--color-accent-dark); }
+
+.btn-secondary {
+  background: var(--color-bg-raised);
+  color: var(--color-accent-dark) !important;
+}
+
+.btn-secondary:hover, .btn-secondary:focus-visible {
+  background: var(--color-accent-soft);
+}
+
+.btn-disabled {
+  background: var(--color-bg-raised);
+  border-color: var(--color-border);
+  color: var(--color-text-soft) !important;
+  cursor: default;
+}
+
+.lesson-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin: 2rem 0 1rem;
+}
+
+.lesson-nav .btn { width: 100%; }
+
+.lesson-nav-index {
+  grid-column: 1 / -1;
+}
+
+.home-link-row {
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+/* ---------- Responsive ---------- */
+@media (min-width: 700px) {
+  html { font-size: 118.75%; } /* ~19px */
+  .home-hero h1 { font-size: 2.8rem; }
+}
+
+@media (max-width: 480px) {
+  .lesson-nav { grid-template-columns: 1fr; }
+  .lesson-header .lesson-number { font-size: 1.8rem; }
+  .home-hero h1 { font-size: 2rem; }
+}
+
+/* No horizontal scroll anywhere */
+html, body { max-width: 100%; overflow-x: hidden; }
