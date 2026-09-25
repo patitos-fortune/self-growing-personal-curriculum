@@ -33,13 +33,16 @@ The AI should then follow the workflow in `prompts/SCOUT.md`. You remain the cur
 ├── README.md
 ├── index.html
 ├── assets/css/style.css
+├── assets/js/progress.js
 ├── curriculum/
-│   └── LEARNING_PROFILE.md
+│   ├── LEARNING_PROFILE.md
+│   └── PROGRESS.json
 ├── prompts/
 │   ├── SCOUT.md
 │   ├── CREATE_LESSON.md
 │   ├── CREATE_COURSE.md
-│   └── REVIEW_CURRICULUM.md
+│   ├── REVIEW_CURRICULUM.md
+│   └── UPDATE_PROGRESS.md
 ├── templates/
 │   ├── lesson.html
 │   └── course.html
@@ -58,6 +61,14 @@ The AI should then follow the workflow in `prompts/SCOUT.md`. You remain the cur
 - **Human curation stays in the loop.** The AI scouts and proposes; the learner decides what deserves attention.
 - **Portable context.** Important learner context lives in this repository rather than depending on one AI provider's memory.
 - **Static by default.** Keep the reading experience offline-friendly and dependency-free.
+
+## Reading progress
+
+The static site can track completed lessons locally in the browser with `localStorage`; no account or backend is required. Every lesson has a stable `course-slug/NN` identifier and can expose a **Mark as read** control.
+
+Browser state is immediate but device-local. Durable, AI-readable progress belongs in `curriculum/PROGRESS.json`. The browser helper can export progress as JSON; give that export to your AI coding assistant and ask it to follow `prompts/UPDATE_PROGRESS.md` to merge it into Git.
+
+This deliberately avoids putting GitHub credentials into the static website. Delivery, opening, completion, and mastery remain separate concepts.
 
 ## Adding content manually
 
