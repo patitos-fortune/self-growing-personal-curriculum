@@ -14,7 +14,11 @@ Look for:
 - courses whose scope has become incoherent;
 - recurring learner choices that may indicate an emerging interest;
 - profile statements that are stale or unsupported;
-- promising next concepts suggested by the curriculum itself.
+- promising next concepts suggested by the curriculum itself;
+- credible newer sources that materially contradict or supersede claims in existing lessons;
+- stale or broken source links.
+
+When sources disagree, preserve provenance and surface the conflict for review. Do not silently overwrite an older lesson simply because a newer source exists.
 
 ## Rules
 
