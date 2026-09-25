@@ -64,6 +64,17 @@ Follow `prompts/CREATE_COURSE.md`. Courses are organizational containers, not ri
 
 Periodically follow `prompts/REVIEW_CURRICULUM.md` to detect duplication, missing bridges, stale profile assumptions, and emerging areas of interest.
 
+## Reading progress
+
+Reading progress has two layers:
+
+- browser-local interaction in `assets/js/progress.js` for immediate static-site controls;
+- durable, portable state in `curriculum/PROGRESS.json`.
+
+Follow `prompts/UPDATE_PROGRESS.md` when the learner reports completion or provides an exported progress file. Never equate delivery, opening, completion, and mastery.
+
+Every published lesson must have a stable ID in the form `course-slug/NN`. Do not change an ID after publication.
+
 ## Structural rules
 
 - Keep the site static HTML/CSS unless the learner explicitly chooses a more complex architecture.
