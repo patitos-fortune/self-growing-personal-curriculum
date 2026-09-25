@@ -44,6 +44,10 @@ For each strong candidate report:
 
 Keep the distinction between "interesting repository" and "good learning opportunity" explicit.
 
+## Staging rule
+
+Scouting is an intake/staging step. Candidate ideas are not curriculum yet. Keep source observations, candidate concepts, and published lessons conceptually separate. This prevents every interesting repository from becoming permanent content and keeps the learner in control of selection.
+
 ## Selection
 
 Once the learner selects a candidate, continue with `CREATE_LESSON.md`.
