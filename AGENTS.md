@@ -50,6 +50,16 @@ A repository may produce:
 
 "No worthwhile lesson here" is an acceptable result.
 
+## Knowledge evolution
+
+Treat scouting as a staging layer, not automatic publication:
+
+**source → candidate concept → learner selection → lesson → curriculum**
+
+Do not let an interesting source silently become canonical curriculum.
+
+If a credible new source materially conflicts with an existing lesson, preserve the disagreement and provenance. Flag the lesson for review rather than silently rewriting the earlier claim. Prefer dated/source-attributed notes when the disagreement matters.
+
 ## Writing lessons
 
 Follow `prompts/CREATE_LESSON.md` and `templates/lesson.html`.
