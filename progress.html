@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Progress — Self-Growing Personal Curriculum</title>
+<meta name="description" content="See, export, import or clear your reading progress.">
+<link rel="stylesheet" href="assets/css/style.css">
+<script src="assets/js/progress.js" defer></script>
+</head>
+<body>
+<header class="site-header"><div class="page"><a class="brand" href="index.html"><span class="brand-name">Self-Growing Personal Curriculum</span></a><span class="crumb">/ Progress</span></div></header>
+<main class="page">
+<h1>Your progress</h1>
+<p>Lessons you have marked as read:</p>
+<ul data-progress-list><li>Loading&hellip;</li></ul>
+<noscript><p class="progress-note">Progress tracking needs JavaScript. Everything else on this site works without it.</p></noscript>
+
+<h2>Where this is stored</h2>
+<ul>
+<li><strong>This browser:</strong> <em>Mark as read</em> saves to this browser's local storage for this site. Nothing is sent anywhere. It does not follow you to other browsers or devices, and it is lost if you clear site data or use a private window.</li>
+<li><strong>The repository:</strong> lessons recorded in <code>curriculum/PROGRESS.json</code> show as read on every device, once the site is published. This is the durable record.</li>
+</ul>
+
+<h2>Keep it or move it</h2>
+<div class="button-row">
+<button class="btn" type="button" data-progress-export>Export progress (JSON)</button>
+<label class="btn btn-secondary">Import progress file<input class="visually-hidden" type="file" accept="application/json,.json" data-progress-import></label>
+</div>
+<p class="status-message" role="status" data-progress-status></p>
+<p class="progress-note"><strong>To make progress permanent:</strong> export it, give <code>learning-progress.json</code> to your AI coding assistant, and ask it to "merge this into <code>curriculum/PROGRESS.json</code> following <code>prompts/UPDATE_PROGRESS.md</code>". Then commit and publish. <strong>To move to another device:</strong> export here and import there.</p>
+
+<h2>Start over</h2>
+<div class="button-row"><button class="btn btn-secondary" type="button" data-progress-reset>Clear this browser's progress</button></div>
+<p class="progress-note">This only clears marks stored in this browser. Records in <code>curriculum/PROGRESS.json</code> can only be changed in the repository.</p>
+
+<div class="home-link-row"><a href="index.html">&larr; Library home</a></div>
+</main>
+<footer class="site-footer"><div class="page"><p>No accounts, no server, no tracking.</p></div></footer>
+</body>
+</html>
