@@ -42,13 +42,16 @@ Reference earlier lessons when useful. Never manufacture a connection merely to 
 
 For source-driven lessons, inspect the real repository and relevant documentation/code before making repository-specific claims. Separate observed facts from interpretation. If evidence is insufficient, say so or choose a better source.
 
-A repository may produce:
-- one strong lesson;
-- several distinct lessons;
-- a candidate for later;
-- or no lesson at all.
+Every scouted candidate must receive an explicit editorial outcome:
+- **ADD** — a distinct, useful concept deserves a new lesson;
+- **MERGE** — useful material strengthens an existing lesson;
+- **REFERENCE** — preserve the source without adding curriculum weight;
+- **REPLACE** — a materially better source/treatment supersedes an earlier candidate, with provenance preserved for published material;
+- **SKIP** — no curriculum action.
 
-"No worthwhile lesson here" is an acceptable result.
+Before choosing ADD, check novelty, overlap, learner/project relevance, source quality, and whether the concept stands on its own. "No worthwhile lesson here" is an acceptable result. Self-growing must not mean automatic accumulation.
+
+For the rationale and the ROADMAP / COURSE / PROJECT starter archetypes, read `docs/curriculum-design-research.md`.
 
 ## Knowledge evolution
 
