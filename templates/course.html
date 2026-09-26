@@ -1,25 +1,36 @@
 <!DOCTYPE html>
+<!--
+  Course template. Copy to courses/COURSE-SLUG/index.html and replace every
+  UPPERCASE placeholder. See prompts/CREATE_COURSE.md. Delete this comment.
+-->
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>COURSE TITLE — Self-Growing Personal Curriculum</title>
 <meta name="description" content="COURSE DESCRIPTION">
 <link rel="stylesheet" href="../../assets/css/style.css">
+<script src="../../assets/js/progress.js" defer></script>
 </head>
 <body>
 <header class="site-header"><div class="page"><a class="brand" href="../../index.html"><span class="brand-name">Self-Growing Personal Curriculum</span></a><span class="crumb">/ COURSE TITLE</span></div></header>
 <main class="page">
 <h1>COURSE TITLE</h1>
-<p class="course-meta">COURSE META</p>
-<p>COURSE INTRODUCTION</p>
-<div class="home-link-row" style="text-align:left; margin:1.5rem 0;"><a class="btn btn-secondary" href="../../index.html">&larr; Back to library</a></div>
-<hr>
-<div class="tier-heading"><span class="tier-badge tier-1">Tier 1</span><h2>Foundations</h2></div>
-<p class="tier-intro">COURSE SECTION DESCRIPTION</p>
+<p class="course-meta">N lessons &middot; <span data-progress-count="COURSE-SLUG">&nbsp;</span></p>
+<p>COURSE INTRODUCTION: what this course is about and how to move through it.</p>
+
+<!-- Optional grouping. Repeat a tier-heading + lesson-list pair per group, or use a single list. -->
+<div class="tier-heading"><span class="tier-badge tier-1">Foundations</span><h2>SECTION TITLE</h2></div>
 <ul class="lesson-list">
-<!-- Add lesson cards here. -->
+<!-- One card per lesson. Title and duration must match the lesson page.
+<li><a class="lesson-card" href="lessons/01.html" data-lesson-id="COURSE-SLUG/01">
+  <div class="lesson-card-top"><span class="lesson-number">01</span><span class="lesson-title">LESSON TITLE</span></div>
+  <span class="lesson-duration">~XX min</span>
+  <p class="lesson-desc">LESSON DESCRIPTION</p>
+</a></li>
+-->
 </ul>
+<div class="home-link-row"><a href="../../index.html">&larr; Library home</a></div>
 </main>
-<footer class="site-footer"><div class="page"><p>This course is part of a self-growing personal curriculum.</p></div></footer>
+<footer class="site-footer"><div class="page"><p>Part of a self-growing personal curriculum.</p></div></footer>
 </body>
 </html>
