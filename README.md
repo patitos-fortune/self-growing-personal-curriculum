@@ -62,6 +62,16 @@ The AI should then follow the workflow in `prompts/SCOUT.md`. You remain the cur
 - **Portable context.** Important learner context lives in this repository rather than depending on one AI provider's memory.
 - **Static by default.** Keep the reading experience offline-friendly and dependency-free.
 
+## Starter curriculum modes
+
+The curriculum can begin with one of three deliberately simple traversal models:
+
+- **ROADMAP** — explore concepts and their prerequisite/adjacency relationships.
+- **COURSE** — follow a recommended sequence with explicit scaffolding.
+- **PROJECT** — learn concepts by building progressively richer artifacts.
+
+These are learning structures, not visual skins or difficulty levels. See `docs/curriculum-design-research.md` for the research sources, selection guidance, compact lesson schema, static-search direction, and ADD / MERGE / REFERENCE / REPLACE / SKIP editorial policy.
+
 ## Reading progress
 
 The static site can track completed lessons locally in the browser with `localStorage`; no account or backend is required. Every lesson has a stable `course-slug/NN` identifier and can expose a **Mark as read** control.
