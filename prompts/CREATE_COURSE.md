@@ -18,7 +18,7 @@ A single unusual lesson can live in the closest sensible course until a real clu
 4. Create `courses/<slug>/lessons/` and add the first lesson with `CREATE_LESSON.md` (numbering starts at `01`).
 5. Describe the course in terms of concepts and goals, not a single source.
 6. Choose a traversal style (ROADMAP, COURSE or PROJECT; see `docs/curriculum-design-research.md`) and say briefly on the course page how to move through it.
-7. Add a course card to the root `index.html` (copy the example card) with the right `href`, `data-progress-count` and `data-total`. If the empty-state callout is still there, remove it.
+7. Add a course card to the root `index.html` (copy the example card) with the right `href`, `data-progress-count` and `data-total`. The "Make it yours" callout can stay or be removed once the learner is settled.
 8. Run `python3 tools/validate_site.py`.
 
 Courses may evolve. Do not pretend the first taxonomy is permanent, but keep published slugs and lesson numbers stable.

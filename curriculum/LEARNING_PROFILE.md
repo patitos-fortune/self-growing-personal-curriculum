@@ -1,35 +1,41 @@
 # Learning Profile
 
-This file is the portable context for the curriculum. It should evolve cautiously as the learner explicitly states interests, goals, experience, projects, and learning preferences.
+Portable context for whoever helps maintain this curriculum (you, or an AI assistant). Keep it short and factual. It should change only when the learner says something new about themselves.
 
-Do not infer sensitive personal information. Do not turn one passing curiosity into a permanent interest without evidence.
+> **Status: not set up yet.** Replace the placeholder lines below (an AI assistant will do this on first run), then delete this line.
 
-## Interests
+Rules for AI assistants: record only what the learner stated. Do not infer sensitive personal information. Do not turn one passing curiosity into a permanent interest.
 
-- Add your interests here.
+## What I want to learn
 
-## Current projects or practical contexts
+- _Add subjects, questions or skills. Anything goes: "how databases work", "jazz harmony", "Spanish for travel", "statistics for my job"._
 
-- Optional. Add projects that may make certain concepts especially relevant.
+## Why (goals or projects)
 
-## Existing experience
+- _Optional. Goals or projects make some concepts more relevant, e.g. "building a home weather station"._
 
-- Add areas you already know, and approximate level when useful.
+## What I already know
 
-## Learning preferences
+- _Relevant background and rough level, so lessons neither repeat the basics nor skip them._
 
-- Concrete examples and real implementations.
-- Concepts should be understandable without installing the source project.
-- Add or change preferences here.
+## How I like to learn
+
+- Concrete examples and worked problems.
+- Lessons that make sense without installing or buying anything.
+- _Add or change preferences: session length, reading on a phone, more diagrams, more exercises..._
+
+## Preferred curriculum shape
+
+- _Optional: ROADMAP (explore connected topics), COURSE (follow an ordered path) or PROJECT (learn by building). See docs/curriculum-design-research.md._
 
 ## Emerging interests
 
-- Leave empty initially. Add themes that recur across choices over time.
+- _Leave empty at first. Add themes that keep coming up in the learner's choices._
 
-## Topics deliberately deprioritized
+## Deliberately not now
 
-- Optional.
+- _Optional: topics to avoid or postpone._
 
 ## Curriculum notes
 
-- Record durable information that helps future agents understand why the curriculum has evolved in its current direction.
+- _Durable decisions that explain why the curriculum is shaped the way it is._

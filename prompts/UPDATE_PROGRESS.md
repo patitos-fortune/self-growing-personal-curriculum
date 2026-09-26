@@ -1,55 +1,58 @@
 # Update Reading Progress
 
-Use this workflow when the learner reports completing lessons or provides an exported browser progress file.
+Use this when the learner reports completing lessons or gives you an exported browser progress file (`learning-progress.json`). Background: `docs/progress-tracking.md`.
 
 ## Meaning of completion
 
 Keep these states distinct:
 
-- **Delivered**: a lesson was sent or suggested.
-- **Opened**: the learner visited it.
-- **Completed/read**: the learner explicitly marked or reported it as read.
-- **Mastered**: never infer this merely from completion.
+- **Delivered:** a lesson was suggested or sent.
+- **Opened:** the learner visited it.
+- **Completed/read:** the learner explicitly marked or reported it as read.
+- **Mastered:** never infer this from completion.
 
-Only explicit learner action should mark a lesson completed.
+Only explicit learner action marks a lesson completed.
 
-## Canonical repository state
+## Canonical format
 
-Durable reading history lives in `curriculum/PROGRESS.json`.
-
-Each completion record uses:
+`curriculum/PROGRESS.json`:
 
 ```json
 {
-  "lesson": "course-slug/01",
-  "completed": "YYYY-MM-DD"
+  "version": 1,
+  "completed": [
+    { "lesson": "course-slug/01", "completed": "YYYY-MM-DD" }
+  ]
 }
 ```
 
-Lesson IDs are stable and correspond to `courses/<course-slug>/lessons/NN.html`.
+Lesson IDs are permanent and correspond to `courses/<course-slug>/lessons/NN.html`. Keep records sorted by lesson ID so diffs stay readable.
 
 ## Updating from conversation
 
 When the learner says they completed a lesson:
 
-1. Confirm the lesson ID from the curriculum.
-2. Add it if it is not already completed.
-3. Preserve existing completion dates.
-4. Do not remove other records.
-5. Use the learner's stated completion date when supplied; otherwise use the current date.
-6. Keep records deterministic and avoid duplicates.
+1. Find the lesson ID from the course index. If the reference is ambiguous ("the one about scales"), confirm it.
+2. Add a record if the lesson is not already completed.
+3. Use the date the learner gave, otherwise today's date.
+4. Keep existing records and dates unchanged. Never create duplicates.
 
-## Merging browser exports
+## Merging a browser export
 
-The static site may export browser-local progress.
+1. Check `"version": 1` and that `completed` is a list. Ignore the extra `exported` field.
+2. For each record, check the ID has the form `slug/NN` and matches an existing lesson file.
+3. Merge by lesson ID. If both have a date, keep the earliest unless the learner says otherwise.
+4. Never delete repository records because the export lacks them.
+5. Report malformed or unknown IDs to the learner. Do not invent lessons for them.
 
-When given an export:
-1. Validate its version and lesson IDs.
-2. Merge by lesson ID.
-3. Never delete repository completions simply because the browser export lacks them.
-4. If both contain dates, preserve the earliest credible completion date unless the learner instructs otherwise.
-5. Report malformed or unknown lesson IDs instead of silently inventing lessons.
+## Removing records
 
-## Recommendations
+Only when the learner explicitly asks (for example, to re-read a lesson as new), or when a lesson is deleted at their request.
 
-When suggesting what to read next, use completion state as context, but do not assume completed means mastered. Prefer sensible continuity and the learner's current interests over mechanically selecting the next number.
+## After editing
+
+Run `python3 tools/validate_site.py`. It fails on malformed records or IDs that do not match a lesson.
+
+## Recommending what to read next
+
+Use completion as context, not as proof of mastery. Prefer sensible continuity and the learner's current interests over simply picking the next number.
