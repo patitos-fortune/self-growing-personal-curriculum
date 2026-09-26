@@ -28,6 +28,8 @@ Your job is not only to generate pages. Help the learner discover, understand, c
 | `templates/` | Starting points: `lesson.html`, `course.html`, `course-card.html` | Rarely |
 | `prompts/` | Step-by-step workflows (below) | Rarely |
 | `tools/validate_site.py` | Structural checks; run after every change | Rarely |
+| `tools/rebrand.py` | Renames/rebrands the site (name, byline, logo) | When the learner asks |
+| `assets/brand/` | Logo/favicon (default: Patitos Fortune duck) | When rebranding |
 | `docs/` | Human documentation | When behaviour changes |
 
 ## Workflows
@@ -49,7 +51,7 @@ When `curriculum/LEARNING_PROFILE.md` still contains the placeholder text:
 2. Ask the learner, briefly, only what materially affects the curriculum: what they want to learn, why (goal or project), what they already know, and how they like to learn. A one-line answer is enough to start.
 3. Record what they said in the learning profile, and remove the placeholder lines and default preferences they did not confirm. Do not invent expertise, goals or preferences. Decisions you make on the learner's behalf (such as a curriculum shape) go under "Curriculum notes", marked as suggested by the assistant.
 4. Ask whether to keep or remove the example course (`courses/example-learning-how-to-learn/`). If they want it removed, see "Removing the example course".
-5. Optionally, suggest a starting shape (ROADMAP, COURSE or PROJECT; see `docs/curriculum-design-research.md`) and whether to rename the site title.
+5. Optionally, suggest a starting shape (ROADMAP, COURSE or PROJECT; see `docs/curriculum-design-research.md`) and ask whether to keep the default Patitos Fortune branding or rebrand (see "Branding").
 6. Scout with `prompts/SCOUT.md` and present candidates. Do not write lessons until the learner chooses, unless they explicitly ask you to go ahead.
 
 If the learner pre-authorises you ("just pick one and write it"), still record every candidate in `CANDIDATES.md`, mark the one you chose `ADD → <slug>/NN` with a note that the learner delegated the choice, leave the others `PROPOSED`, and tell the learner which one you picked and why.
@@ -132,6 +134,14 @@ python3 tools/validate_site.py
 ```
 
 It must end with `RESULT: PASS`. Then, if you can, preview the site locally with `python3 -m http.server 8000` and open the pages you changed, including on a narrow (phone-width) window. On GitHub, the Pages workflow runs the same validator and refuses to deploy if it fails.
+
+## Branding
+
+The template ships with a Patitos Fortune default presentation: a duck logo (`assets/brand/logo.svg`), a "by Patitos Fortune" byline, and a warm palette in the CSS variables. It is a theme, not part of how the curriculum works.
+
+- Keep the brand in presentation only: `<span class="brand-name">`, `<span class="brand-byline">`, `<title>`, the logo file and the CSS variables. Never put a brand name into course slugs, lesson IDs, file names, storage keys or JavaScript.
+- New pages copy their header and footer from `templates/` so the branding stays consistent and replaceable.
+- To rename or rebrand, use `python3 tools/rebrand.py` (see `docs/customizing.md`). Don't hand-edit every page. Update the README header by hand. Change the branding only when the learner asks.
 
 ## Human agency
 

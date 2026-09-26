@@ -1,4 +1,8 @@
-# Self-Growing Personal Curriculum
+<p align="center"><img src="assets/brand/logo.svg" alt="Patitos Fortune duck" width="96"></p>
+
+<h1 align="center">Self-Growing Personal Curriculum</h1>
+
+<p align="center"><strong>A Patitos Fortune template</strong></p>
 
 A template for a **personal learning library that you grow with an AI coding assistant**. You tell the assistant what you want to learn. It suggests topics backed by real sources, writes short self-contained lessons for the ones you pick, and keeps the curriculum coherent over time. The result is a small static website you can read on your phone and publish free on GitHub Pages.
 
@@ -8,7 +12,7 @@ A template for a **personal learning library that you grow with an AI coding ass
 - **Works with any capable AI assistant:** the rules live in [`AGENTS.md`](AGENTS.md), not in one provider's memory.
 - **Tracks what you've read:** click **Mark as read**. Progress lives in your browser and, if you want, in a JSON file committed to the repository.
 
-It includes a two-lesson example course so you can see the format before you start.
+It includes a two-lesson example course so you can see the format before you start. It ships with the Patitos Fortune look (duck logo, warm palette), and you can keep it or rebrand in one command. See [Customizing](#customizing).
 
 ## Get started in 5 minutes
 
@@ -80,7 +84,8 @@ To make browser progress permanent, export it from the Progress page and ask you
 ├── index.html                 Library home: one card per course
 ├── progress.html              Progress page: list, export, import, reset
 ├── assets/
-│   ├── css/style.css          The only stylesheet
+│   ├── brand/logo.svg         Default logo and favicon (Patitos Fortune duck)
+│   ├── css/style.css          The only stylesheet; brand colours at the top
 │   └── js/progress.js         Mark-as-read and progress (the only script)
 ├── courses/
 │   └── <course-slug>/
@@ -92,8 +97,9 @@ To make browser progress permanent, export it from the Progress page and ask you
 │   └── PROGRESS.json          Durable reading progress
 ├── prompts/                   SCOUT, CREATE_LESSON, CREATE_COURSE, UPDATE_PROGRESS, REVIEW_CURRICULUM
 ├── templates/                 lesson.html, course.html, course-card.html starting points
-├── docs/                      Publishing, progress, starter prompts, design research
+├── docs/                      Publishing, progress, customizing, starter prompts, design research
 ├── tools/validate_site.py     Structural checks (Python 3 standard library only)
+├── tools/rebrand.py           Rename or rebrand the site in one step
 └── .github/workflows/pages.yml  Validates every push/PR; deploys main to GitHub Pages
 ```
 
@@ -105,9 +111,9 @@ python3 tools/validate_site.py
 
 It checks links, relative paths, lesson numbering and IDs, Previous/Next navigation, title and duration consistency between course indexes and lessons, leftover template placeholders, and `PROGRESS.json`. The GitHub workflow runs it on every push and pull request and will not deploy a failing site. It checks structure, not facts, so read what your assistant writes.
 
-## Customising
+## Customizing
 
-- **Title and look:** ask your assistant to rename the site on every page, or edit the colour variables at the top of `assets/css/style.css`.
+- **Name, byline, logo:** the default presentation is Patitos Fortune branded. Run `python3 tools/rebrand.py --name "My Library" --byline "by Me"` (and optionally `--logo`). Colours are variables at the top of `assets/css/style.css`. Branding never touches lesson IDs or progress. Full list of what to change: [docs/customizing.md](docs/customizing.md).
 - **Curriculum shape:** ROADMAP (explore connected topics), COURSE (ordered path) or PROJECT (learn by building). See [docs/curriculum-design-research.md](docs/curriculum-design-research.md).
 - **Adding lessons by hand:** copy `templates/lesson.html`, follow [prompts/CREATE_LESSON.md](prompts/CREATE_LESSON.md), and run the validator.
 

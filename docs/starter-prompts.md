@@ -36,7 +36,7 @@ Copy these into any AI coding assistant that can read and edit files in your rep
 
 > Remove the example course, following "Removing the example course" in AGENTS.md.
 
-> Rename the site title from "Self-Growing Personal Curriculum" to "[My Library]" on every page and template.
+> Rebrand the site as "[My Library]" by [me] using tools/rebrand.py (see docs/customizing.md), and update the README header. Keep lesson IDs and progress untouched.
 
 > Help me publish this site with GitHub Pages following docs/publishing.md.
 
