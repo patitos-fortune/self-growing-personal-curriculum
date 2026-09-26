@@ -4,25 +4,35 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Self-Growing Personal Curriculum</title>
-<meta name="description" content="A personal learning library that grows from your interests, grounded in real implementations.">
+<meta name="description" content="A personal learning library that grows from your interests, maintained with an AI coding assistant and published as a static site.">
 <link rel="stylesheet" href="assets/css/style.css">
+<script src="assets/js/progress.js" defer></script>
 </head>
 <body>
-<header class="site-header"><div class="page"><span class="brand"><span class="brand-name">Self-Growing Personal Curriculum</span></span></div></header>
+<header class="site-header"><div class="page"><span class="brand"><span class="brand-name">Self-Growing Personal Curriculum</span></span><a class="header-link" href="progress.html">Progress</a></div></header>
 <main class="page">
 <section class="home-hero">
 <h1>Self-Growing Personal Curriculum</h1>
-<p class="home-subtitle">Start with curiosity. Grow a curriculum around what keeps becoming interesting.</p>
+<p class="home-subtitle">Start with what you want to learn. Grow a library of short, well-sourced lessons around it.</p>
 </section>
+
 <section aria-labelledby="courses-heading">
 <h2 id="courses-heading">Courses</h2>
+
+<!-- One course card per course. Copy this block for new courses (see prompts/CREATE_COURSE.md). -->
+<a class="course-card" href="courses/example-learning-how-to-learn/index.html">
+<h2>Learning How to Learn <span class="example-flag">Example</span></h2>
+<p class="course-meta">2 lessons &middot; <span class="progress-count" data-progress-count="example-learning-how-to-learn" data-total="2"></span></p>
+<p>Spaced repetition and retrieval practice: two study techniques with strong evidence behind them. Included to show the lesson format. Keep it or remove it.</p>
+<span class="btn">Open course</span>
+</a>
+
 <div class="callout">
-<h3>Your curriculum starts here</h3>
-<p>This repository is designed to grow. Point your AI coding assistant to <code>AGENTS.md</code>, add your interests to the learning profile, and scout real open-source projects for concepts worth understanding.</p>
+<h3>Make it yours</h3>
+<p>Open this repository with an AI coding assistant and tell it what you want to learn. It will follow <code>AGENTS.md</code> to set up your learning profile, suggest topics, and add lessons once you approve them. The README has step-by-step instructions and starter prompts.</p>
 </div>
-<p>No courses have been installed yet. Starter courses can be added without changing the underlying architecture.</p>
 </section>
 </main>
-<footer class="site-footer"><div class="page"><p>Static, portable, offline-friendly, and AI-provider independent.</p></div></footer>
+<footer class="site-footer"><div class="page"><p>Static, portable and AI-provider independent. Reading progress stays in your browser unless you commit it to <code>curriculum/PROGRESS.json</code>. See the <a href="progress.html">Progress</a> page.</p></div></footer>
 </body>
 </html>
