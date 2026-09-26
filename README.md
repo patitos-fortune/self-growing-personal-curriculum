@@ -91,7 +91,7 @@ To make browser progress permanent, export it from the Progress page and ask you
 │   ├── CANDIDATES.md          Scouted ideas and decisions (not published lessons)
 │   └── PROGRESS.json          Durable reading progress
 ├── prompts/                   SCOUT, CREATE_LESSON, CREATE_COURSE, UPDATE_PROGRESS, REVIEW_CURRICULUM
-├── templates/                 lesson.html and course.html starting points
+├── templates/                 lesson.html, course.html, course-card.html starting points
 ├── docs/                      Publishing, progress, starter prompts, design research
 ├── tools/validate_site.py     Structural checks (Python 3 standard library only)
 └── .github/workflows/pages.yml  Validates every push/PR; deploys main to GitHub Pages
@@ -128,10 +128,6 @@ It checks links, relative paths, lesson numbering and IDs, Previous/Next navigat
 **Is my learning profile public?** If your repository is public, yes, like every other file in it. Keep sensitive details out of it, or use a private repository (see [docs/publishing.md](docs/publishing.md) for how Pages behaves with private repositories).
 
 **Can I use it without GitHub?** Yes. It's a folder of static files. Open `index.html` locally or upload it to any static host.
-
-## Background
-
-This project grew out of the maintainer's own AI-maintained learning site. This repository is the generic, reusable version. It has no dependency on that site, and the two evolve separately.
 
 ## License
 

@@ -20,9 +20,7 @@ Rules for AI assistants: record only what the learner stated. Do not infer sensi
 
 ## How I like to learn
 
-- Concrete examples and worked problems.
-- Lessons that make sense without installing or buying anything.
-- _Add or change preferences: session length, reading on a phone, more diagrams, more exercises..._
+- _Session length, reading on a phone, more diagrams, more exercises... If left empty, lessons default to concrete worked examples that make sense without installing or buying anything._
 
 ## Preferred curriculum shape
 
@@ -38,4 +36,4 @@ Rules for AI assistants: record only what the learner stated. Do not infer sensi
 
 ## Curriculum notes
 
-- _Durable decisions that explain why the curriculum is shaped the way it is._
+- _Durable decisions that explain why the curriculum is shaped the way it is. Mark decisions an assistant made on the learner's behalf as such._

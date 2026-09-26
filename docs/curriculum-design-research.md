@@ -1,6 +1,6 @@
 # Curriculum Design Research
 
-This document records the design principles adopted after comparing several mature learning and curation repositories. These projects are references, not dependencies or templates to copy wholesale.
+This document records the design principles adopted after comparing several mature learning and curation repositories. These projects are references, not dependencies or templates to copy wholesale. Most of them happen to be software-oriented, but the structures they illustrate apply to any subject: a roadmap of jazz harmony or a project path for learning woodworking works the same way.
 
 ## Three starter curriculum archetypes
 
@@ -128,7 +128,7 @@ Every scouted candidate should receive one explicit editorial outcome:
 - **ADD** — sufficiently novel and useful to deserve a new lesson.
 - **MERGE** — valuable material that strengthens an existing lesson without deserving a separate one.
 - **REFERENCE** — preserve as a useful source/example, but do not add curriculum weight.
-- **REPLACE** — a clearly better source or treatment supersedes an existing candidate; preserve provenance when replacing published material.
+- **REPLACE** — a clearly better source or treatment supersedes something already accepted (a lesson or an earlier candidate); preserve provenance and keep published lesson IDs.
 - **SKIP** — interesting is not enough; no curriculum action is required.
 
 Before choosing ADD, check:
@@ -140,9 +140,9 @@ Before choosing ADD, check:
 
 The system should be comfortable becoming better without becoming larger.
 
-## Relationship to the existing scouting workflow
+## Relationship to the scouting workflow
 
-The original flow remains:
+The scouting flow in `prompts/SCOUT.md` is unchanged by the choice of archetype:
 
 ```text
 source

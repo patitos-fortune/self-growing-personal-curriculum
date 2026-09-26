@@ -18,7 +18,7 @@ A lesson keeps these separate:
 - **Mechanism:** how the idea actually works.
 - **Transfer:** where else it applies.
 
-It is not an installation guide, a book summary or a repository walkthrough. It should be self-contained, readable on a phone, and doable in one focused sitting (usually 10–30 minutes).
+It is not an installation guide, a book summary or a repository walkthrough. It should be self-contained, readable on a phone, and doable in one focused sitting (usually 10–30 minutes, which is roughly 1,000–2,500 words including the example). Prefer short paragraphs, and keep tables narrow or wrap them in `.table-scroll`.
 
 ## Structure
 

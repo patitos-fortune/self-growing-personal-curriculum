@@ -15,11 +15,13 @@ Checks (errors fail the run, warnings do not):
   links to its course index and the library home, has a lesson-nav block with
   correct Previous/Next links, and no leftover template placeholders;
 * lesson titles and durations match the course index cards;
-* every course is linked from the root index.html;
+* every course is linked from the root index.html, and lesson counts
+  ("N lessons", data-total) on the home card and course index are correct;
 * curriculum/PROGRESS.json is well formed and only references real lessons.
 
 Only the Python standard library is used. templates/ is skipped because its
-relative paths are written for their final location under courses/.
+relative paths are written for their final location under courses/. HTML
+comments are ignored, so guidance comments copied from templates are harmless.
 """
 import html
 import json
@@ -31,8 +33,11 @@ ROOT = Path(__file__).resolve().parent.parent
 COURSES = ROOT / "courses"
 PROGRESS = ROOT / "curriculum" / "PROGRESS.json"
 SKIP_DIRS = {".git", "templates", "node_modules", "_site"}
-PLACEHOLDERS = ["LESSON TITLE", "COURSE TITLE", "COURSE-SLUG", "ONE-SENTENCE TAGLINE",
-                ">CONTENT<", "TAKEAWAY<", "LESSON DESCRIPTION", "COURSE DESCRIPTION"]
+# Uppercase placeholders used in templates/ (checked outside HTML comments).
+PLACEHOLDERS = ["LESSON TITLE", "COURSE TITLE", "COURSE-SLUG", "ONE-SENTENCE TAGLINE", "SOURCE NAME",
+                "SOURCE-URL", "~XX min", ">CONTENT<", ">EXERCISE<", "ANSWER AND REASONING", "TAKEAWAY<",
+                "LESSON DESCRIPTION", "COURSE DESCRIPTION", "COURSE INTRODUCTION", "SECTION TITLE",
+                ">N lessons", "COURSE SUMMARY"]
 LESSON_ID = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*/\d{2,}$")
 DATE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 
@@ -41,6 +46,9 @@ def err(msg): errors.append(msg)
 def warn(msg): warnings.append(msg)
 def rel(p): return p.relative_to(ROOT).as_posix()
 def external(ref): return ref.startswith(("http://", "https://", "mailto:", "#", "//", "data:"))
+def read(p):
+    """Page text with HTML comments removed (comments may hold template guidance)."""
+    return re.sub(r"<!--.*?-->", "", p.read_text(encoding="utf-8"), flags=re.S)
 def text_of(fragment): return re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", "", fragment))).strip()
 
 
@@ -78,6 +86,19 @@ def lesson_cards(index_text):
     return cards
 
 
+def check_home_card(home_text, slug, count):
+    m = re.search(r'<a\b[^>]*href="courses/' + re.escape(slug) + r'/index\.html"[^>]*>(.*?)</a>', home_text, re.S)
+    if not m:
+        err(f"index.html does not link courses/{slug}/index.html"); return
+    card = m.group(1)
+    t = re.search(r'data-total="(\d+)"', card)
+    if t and int(t.group(1)) != count:
+        err(f"index.html: course card for {slug} has data-total=\"{t.group(1)}\" but the course has {count} lesson(s)")
+    n = re.search(r'class="course-meta"[^>]*>\s*(\d+) lessons?', card)
+    if n and int(n.group(1)) != count:
+        err(f"index.html: course card for {slug} says {n.group(1)} lesson(s) but the course has {count}")
+
+
 def validate_course(course, lesson_ids):
     slug = course.name
     idx, lessons = course / "index.html", course / "lessons"
@@ -87,7 +108,7 @@ def validate_course(course, lesson_ids):
         err(f"courses/{slug}: missing index.html"); return
     if not lessons.is_dir():
         err(f"courses/{slug}: missing lessons/ folder"); return
-    index_text = idx.read_text(encoding="utf-8")
+    index_text = read(idx)
     cards = lesson_cards(index_text)
     files = {}
     for f in lessons.glob("*.html"):
@@ -99,11 +120,15 @@ def validate_course(course, lesson_ids):
         err(f"courses/{slug}: lesson files are not a continuous 01..NN sequence: {nums}")
     if sorted(cards) != nums:
         err(f"courses/{slug}: course index links lessons {sorted(cards)} but files exist for {nums}")
+    for place, text in [(f"courses/{slug}/index.html", index_text)]:
+        m = re.search(r'class="course-meta"[^>]*>\s*(\d+) lessons?', text)
+        if m and int(m.group(1)) != len(nums):
+            err(f"{place}: says {m.group(1)} lesson(s) but the course has {len(nums)}")
     if f'data-progress-count="{slug}"' not in index_text and nums:
         warn(f"courses/{slug}/index.html: no data-progress-count=\"{slug}\" element (progress summary hidden)")
     last = max(nums) if nums else 0
     for n, f in sorted(files.items()):
-        t = f.read_text(encoding="utf-8")
+        t = read(f)
         name = rel(f)
         expected_id = f"{slug}/{f.stem}"
         m = re.search(r'<body[^>]*\bdata-lesson-id="([^"]+)"', t)
@@ -175,16 +200,17 @@ def validate_progress(lesson_ids):
 def main():
     lesson_ids = set()
     home = ROOT / "index.html"
-    home_text = home.read_text(encoding="utf-8") if home.exists() else ""
+    home_text = read(home) if home.exists() else ""
     if not home_text:
         err("index.html (library home) is missing")
     if COURSES.exists():
         for c in sorted(x for x in COURSES.iterdir() if x.is_dir()):
             validate_course(c, lesson_ids)
-            if f'courses/{c.name}/index.html' not in home_text:
-                err(f"index.html does not link courses/{c.name}/index.html")
+            lessons = c / "lessons"
+            count = len(list(lessons.glob("*.html"))) if lessons.is_dir() else 0
+            check_home_card(home_text, c.name, count)
     for p in site_html_files():
-        check_paths(p, p.read_text(encoding="utf-8"))
+        check_paths(p, read(p))
     validate_progress(lesson_ids)
     courses = len([c for c in COURSES.iterdir() if c.is_dir()]) if COURSES.exists() else 0
     print(f"Checked {courses} course(s), {len(lesson_ids)} lesson(s).")

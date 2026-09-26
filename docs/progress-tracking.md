@@ -19,7 +19,7 @@ It survives page navigation, reloads and browser restarts.
 {
   "version": 1,
   "completed": [
-    { "lesson": "example-learning-how-to-learn/01", "completed": "2026-09-26" }
+    { "lesson": "jazz-harmony/01", "completed": "2026-09-26" }
   ]
 }
 ```

@@ -25,7 +25,7 @@ Your job is not only to generate pages. Help the learner discover, understand, c
 | `progress.html` | Progress page (export/import/reset) | Rarely |
 | `assets/css/style.css` | The only stylesheet | Rarely; reuse existing classes |
 | `assets/js/progress.js` | Browser-side progress tracking | Rarely |
-| `templates/` | Starting points for new courses and lessons | Rarely |
+| `templates/` | Starting points: `lesson.html`, `course.html`, `course-card.html` | Rarely |
 | `prompts/` | Step-by-step workflows (below) | Rarely |
 | `tools/validate_site.py` | Structural checks; run after every change | Rarely |
 | `docs/` | Human documentation | When behaviour changes |
@@ -47,10 +47,12 @@ When `curriculum/LEARNING_PROFILE.md` still contains the placeholder text:
 
 1. Read this file, `README.md` and `curriculum/LEARNING_PROFILE.md`.
 2. Ask the learner, briefly, only what materially affects the curriculum: what they want to learn, why (goal or project), what they already know, and how they like to learn. A one-line answer is enough to start.
-3. Record what they said in the learning profile. Do not invent expertise, goals or preferences.
+3. Record what they said in the learning profile, and remove the placeholder lines and default preferences they did not confirm. Do not invent expertise, goals or preferences. Decisions you make on the learner's behalf (such as a curriculum shape) go under "Curriculum notes", marked as suggested by the assistant.
 4. Ask whether to keep or remove the example course (`courses/example-learning-how-to-learn/`). If they want it removed, see "Removing the example course".
 5. Optionally, suggest a starting shape (ROADMAP, COURSE or PROJECT; see `docs/curriculum-design-research.md`) and whether to rename the site title.
 6. Scout with `prompts/SCOUT.md` and present candidates. Do not write lessons until the learner chooses, unless they explicitly ask you to go ahead.
+
+If the learner pre-authorises you ("just pick one and write it"), still record every candidate in `CANDIDATES.md`, mark the one you chose `ADD → <slug>/NN` with a note that the learner delegated the choice, leave the others `PROPOSED`, and tell the learner which one you picked and why.
 
 ## Research ideas vs. accepted curriculum
 
@@ -64,7 +66,7 @@ Keep these stages separate. This is what stops the curriculum from bloating:
   - **ADD**: a distinct, useful concept that deserves a new lesson;
   - **MERGE**: strengthens an existing lesson (name it);
   - **REFERENCE**: worth keeping as a source, but adds no lesson;
-  - **REPLACE**: a clearly better source or treatment for an existing lesson (preserve provenance);
+  - **REPLACE**: a clearly better source or treatment for something already accepted, a lesson or an earlier candidate (preserve provenance, and keep the lesson ID);
   - **SKIP**: no action. "Nothing worth adding" is a valid result.
 - Before proposing ADD, check `CANDIDATES.md` and existing lesson titles so you don't propose something already covered, merged or skipped.
 
