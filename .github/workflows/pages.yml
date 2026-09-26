@@ -1,0 +1,51 @@
+# Validates the site on every push and pull request, and publishes it to
+# GitHub Pages on pushes to main.
+#
+# One-time setup in your repository: Settings → Pages → Build and deployment →
+# Source: "GitHub Actions". On a fork, also enable workflows on the Actions tab.
+# See docs/publishing.md.
+name: Validate and publish site
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate curriculum structure and links
+        run: python3 tools/validate_site.py
+
+  deploy:
+    # Only publish from main, never from pull requests.
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: validate
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - name: Upload the static site (repository root; no build step)
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
