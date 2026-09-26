@@ -1,29 +1,31 @@
 # Review the Curriculum
 
-Use periodically, or when the learner asks what to learn next.
+Use this periodically, or when the learner asks what to learn next or whether the curriculum still makes sense.
 
-## Review
+## Read
 
-Inspect the learning profile, course indexes, and lesson titles/content where needed.
+The learning profile, `curriculum/CANDIDATES.md`, `curriculum/PROGRESS.json`, the course indexes, and lesson content where needed.
 
-Look for:
-- duplicated concepts;
-- lessons that should cross-reference one another;
-- missing prerequisites or useful bridges;
-- isolated lessons that now form an emerging course;
-- courses whose scope has become incoherent;
-- recurring learner choices that may indicate an emerging interest;
-- profile statements that are stale or unsupported;
-- promising next concepts suggested by the curriculum itself;
-- credible newer sources that materially contradict or supersede claims in existing lessons;
-- stale or broken source links.
+## Look for
 
-When sources disagree, preserve provenance and surface the conflict for review. Do not silently overwrite an older lesson simply because a newer source exists.
+- duplicated concepts across lessons or courses;
+- lessons that should mention each other, and missing prerequisites or bridges;
+- isolated lessons that now form a cluster worth its own course;
+- courses whose scope has drifted;
+- candidates left as `PROPOSED` for a long time (ask whether to decide or drop them);
+- recurring choices that suggest an emerging interest the profile does not yet mention;
+- profile statements that look stale (ask; do not rewrite on speculation);
+- credible newer sources that contradict or supersede claims in existing lessons;
+- broken or stale source links;
+- lessons read long ago that might deserve a short recap or review exercise.
 
 ## Rules
 
-Do not reorganize or renumber published lessons merely for tidiness. Do not rewrite the learner's profile based on speculation. Do not force every lesson into a grand dependency graph.
+- Do not renumber, rename or reorder published lessons for tidiness. IDs are permanent.
+- When sources disagree, preserve both with dates and citations. Do not silently overwrite.
+- Do not force every lesson into one dependency graph.
+- **Report proposed changes first.** Apply them only when the learner agrees.
 
-Report proposed changes first. Apply structural or content changes only when requested.
+Afterwards, run `python3 tools/validate_site.py` if anything changed.
 
-The purpose is to keep the curriculum coherent while preserving the learner's idiosyncratic path through knowledge.
+The goal is a coherent curriculum that still reflects the learner's own path through the subjects.

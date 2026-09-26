@@ -1,53 +1,56 @@
 # Scout for Learning Opportunities
 
-Use this workflow when the learner wants to discover what to learn next, especially from GitHub or other inspectable open-source projects.
+Use this when the learner wants to discover what to learn next, or asks "what can I learn from this source?"
 
 ## Inputs
 
 Read:
 - `curriculum/LEARNING_PROFILE.md`;
+- `curriculum/CANDIDATES.md` (what was already proposed, merged or skipped);
 - existing course indexes and lesson titles;
-- any repository, topic, domain, or constraint supplied by the learner.
+- any topic, source, goal or constraint the learner gave you.
 
-The learner may provide either a source ("What can I learn from this repository?") or an interest ("Find useful things for me to learn about procedural generation").
+The learner may give you a **source** ("What can I learn from this repository / book chapter / paper?") or an **interest** ("Find good things for me to learn about harmony in jazz").
 
 ## Goal
 
-Find **transferable concepts worth understanding**, not merely popular repositories.
+Find **concepts worth understanding**, each backed by a credible source, not just popular links.
+
+Good sources depend on the subject:
+- software and systems: readable open-source code, official docs, design documents;
+- sciences and maths: open textbooks, open courseware, review papers, reputable explainers;
+- languages, arts and crafts: well-regarded references, style guides, annotated examples;
+- anything: primary sources and recognised standards bodies over anonymous summaries.
 
 ## Process
 
-1. Search or inspect real candidate projects.
-2. Establish what each project actually does.
-3. Identify the specific concept(s) it demonstrates well.
-4. Compare each concept with the existing curriculum.
+1. Search for or inspect real candidate sources. Only cite sources you actually looked at.
+2. Establish what each source actually says or does.
+3. Identify the specific concept it demonstrates or explains well.
+4. Compare with existing lessons and with `CANDIDATES.md`.
 5. Classify the opportunity:
    - **Deepens** an existing thread;
    - **Connects** two or more existing ideas;
    - **Introduces** a worthwhile new direction;
    - **Duplicate / low value**;
-   - **Interesting project, weak teaching source**.
-6. Prefer projects with readable implementation or documentation, clear provenance, and enough evidence to ground a lesson.
-7. Do not force relevance to the learner's projects.
-8. Do not create lessons until the learner chooses candidates, unless explicitly asked to do so.
+   - **Interesting source, weak teaching material**.
+6. Propose an editorial outcome for each (ADD / MERGE / REFERENCE / REPLACE / SKIP; see `AGENTS.md`).
+7. Record every candidate in `curriculum/CANDIDATES.md` with outcome `PROPOSED` (or `SKIP`, with a reason).
+8. Present the candidates to the learner. Do not write lessons until they choose, unless they explicitly asked you to.
 
-## Candidate output
+## What to show the learner
 
-For each strong candidate report:
-- source repository;
-- what it actually does;
-- transferable concept;
-- why the concept may matter to this learner;
-- relationship to existing lessons, if any;
-- suggested depth;
-- confidence/evidence notes.
+For each strong candidate, three to seven per round:
+- the concept, in plain words;
+- the source and what it actually is;
+- why it may matter to *this* learner (link to their stated interests or goals, without forcing it);
+- how it relates to existing lessons;
+- suggested depth (one lesson / a short series);
+- how confident you are in the source.
 
-Keep the distinction between "interesting repository" and "good learning opportunity" explicit.
+Keep "interesting source" and "good learning opportunity" clearly separate.
 
-## Staging rule
+## After the learner decides
 
-Scouting is an intake/staging step. Candidate ideas are not curriculum yet. Keep source observations, candidate concepts, and published lessons conceptually separate. This prevents every interesting repository from becoming permanent content and keeps the learner in control of selection.
-
-## Selection
-
-Once the learner selects a candidate, continue with `CREATE_LESSON.md`.
+- Update each candidate's outcome in `CANDIDATES.md` (`ADD → slug/NN`, `MERGE → slug/NN`, `SKIP`, and so on) and move it to "Decided".
+- For accepted candidates, continue with `CREATE_LESSON.md`.
